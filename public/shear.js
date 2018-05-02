@@ -16,15 +16,14 @@ function mulaiShearXY(context, canvas){
    var pusatKubus = {x: 0, y: 0, z: 0};
    var kubus = new Kubus(pusatKubus, 200);
 
-   //untuk rotate hasil akhir agar terlihat
-   kubus = rotateRender(30, 30, kubus, pusatKubus);
-
    //besarnya shear
-   var deltaX = 1;
-   var deltaY = 1;
+   var deltaX = 0.5;
+   var deltaY = 0.5;
 
    //membuat matrix transformasi shear
    var matrixShear = new ShearXY(deltaX / 5, deltaY / 5);
+
+   //print matrix trans disini
 
    //untuk menghitung seberapa besar Shear
    var totalDeltaX = 0;
@@ -38,11 +37,15 @@ function mulaiShearXY(context, canvas){
       if(totalDeltaX >= deltaX && totalDeltaY >= deltaY){
          matrixShear = new ShearXY(-deltaX / 5, -deltaY / 5);
          reverse = true;
+
+         //print matrix trans disini
       }
 
       if(totalDeltaX <= 0 && totalDeltaY <= 0){
          matrixShear = new ShearXY(deltaX / 5, deltaY / 5);
          reverse = false;
+
+         //print matrix trans disini
       }
 
       //update status shear
@@ -67,7 +70,7 @@ function mulaiShearXY(context, canvas){
 
       kubus = new KubusFromVertex(finalVertex);
 
-      render(kubus, context, canvas.width / 2 , canvas.height/2, canvas);
+      render(rotateRender(30, 30, kubus, pusatKubus), context, canvas.width / 2 , canvas.height/2, canvas);
    }
 
    setInterval(startShearXY, 100);

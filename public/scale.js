@@ -10,43 +10,15 @@ function main(){
    mulaiScale(context, canvas);
 }
 
-//untuk rotasi
-function mulaiRotasi(context, canvas){
-   var pusatKubus = {x: 0, y: 0, z: 0};
-   var kubus = new Kubus(pusatKubus, 200);
-   var rotateX = new RotateXMatrix(4, pusatKubus);
-   var rotateY = new RotateYMatrix(2, pusatKubus);
-   var matrixTransformasi = kaliMatrix(rotateY.Ry, rotateX.Rx);
-
-   function startTransform(){
-      var finalVertex = [];
-      for(var i = 0; i < kubus.vertex.length; i++){
-         var pointP = new MatrixFromObject(kubus, i);
-
-         var finalPoint = kaliMatrix(matrixTransformasi, pointP.P);
-         finalVertex.push(new Vertex(finalPoint[0][0], finalPoint[1][0], finalPoint[2][0]));
-      }
-
-      kubus = new KubusFromVertex(finalVertex);
-
-      render(kubus, context, canvas.width / 2 , canvas.height/2, canvas);
-   }
-
-   setInterval(startTransform, 50);
-}
-
 //untuk mulai  scale
 function mulaiScale(context, canvas){
    var pusatKubus = {x: 0, y: 0, z: 0};
    var kubus = new Kubus(pusatKubus, 200);
 
-   //rotate kubus saat render
-   kubus = rotateRender(30, 30, kubus, pusatKubus);
-
    //untuk menentukan besarnya scale
-   var scaleX = 1.08;
-   var scaleY = 1; //jangan 0
-   var scaleZ = 1; //jangan 0
+   var scaleX = 1.05;
+   var scaleY = 1.05; //jangan 0
+   var scaleZ = 1.05; //jangan 0
 
    //delta waktu interfal (milisecond)
    var deltaT = 100;
@@ -98,7 +70,7 @@ function mulaiScale(context, canvas){
 
       kubus = new KubusFromVertex(finalVertex);
 
-      render(kubus, context, canvas.width / 2 , canvas.height/2, canvas);
+      render(rotateRender(30, 30, kubus, pusatKubus), context, canvas.width / 2 , canvas.height/2, canvas);
    }
 
    //startTransform();
