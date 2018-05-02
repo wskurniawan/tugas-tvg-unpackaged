@@ -1,0 +1,8 @@
+.row {
+    display: table;
+}
+.center {
+    display: table-cell;
+    vertical-align: middle;
+    text-align:center
+}

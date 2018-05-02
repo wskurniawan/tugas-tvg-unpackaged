@@ -17,6 +17,7 @@ function mulaiRotasi(context, canvas){
    var rotateX = new RotateXMatrix(4, pusatKubus);
    var rotateY = new RotateYMatrix(2, pusatKubus);
    var matrixTransformasi = kaliMatrix(rotateY.Ry, rotateX.Rx);
+   console.log(matrixTransformasi.map(i => i.toString()));
 
    function startTransform(){
       var finalVertex = [];

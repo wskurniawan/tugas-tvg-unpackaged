@@ -5,10 +5,54 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <title>TVG</title>
    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link href="public/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-   <canvas id="cnv" width="1200" height="600"></canvas>
-
-   <script src="/public/main.js"></script>
+    <div class="row">
+        <div class="col-md-8" style="border-right: 3px solid black;">
+            <canvas id="cnv" width="800" height="600"></canvas>
+        </div>
+        <div class="col-md-4">
+            <div class="row" style="border-bottom: 3px solid black; height: 50%; width: 50%;">
+                Coba
+            </div>
+            <div class="row" style="height: 100%; width: 100%; padding-top: 30%;">
+                    <div style="padding-left: 50%;">
+                            Matriks Transformasi
+                            <table id="matrix" style="color: red; border-left: 1px solid black; border-right: 1px solid black;">
+                                    <tr>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>4</td>
+                                    </tr>
+                            </table>
+                    </div>
+            </div>
+        </div>
+    </div>
+   
+   
+   <script src="public/rotasi.js"></script>
+   <script src="public/main.js"></script>
+   <script src="public/bootstrap.min.js"></script>
 </body>
 </html>
