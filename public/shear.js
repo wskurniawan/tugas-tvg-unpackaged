@@ -1,3 +1,5 @@
+var stop;
+/**
 (() => {
    main();
 })();
@@ -9,7 +11,7 @@ function main(){
 
    mulaiShearXY(context, canvas);
 }
-
+ */
 //untuk shear
 function mulaiShearXY(context, canvas){
    //inisiasi objek awal kubus
@@ -22,6 +24,7 @@ function mulaiShearXY(context, canvas){
 
    //membuat matrix transformasi shear
    var matrixShear = new ShearXY(deltaX / 5, deltaY / 5);
+   print(matrixShear.shXY);
 
    //print matrix trans disini
 
@@ -73,7 +76,7 @@ function mulaiShearXY(context, canvas){
       render(rotateRender(30, 30, kubus, pusatKubus), context, canvas.width / 2 , canvas.height/2, canvas);
    }
 
-   setInterval(startShearXY, 100);
+   stop = setInterval(startShearXY, 100);
    //startShearXY();
 }
 

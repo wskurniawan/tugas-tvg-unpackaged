@@ -1,15 +1,4 @@
-(() => {
-   main();
-})();
-function main(){
-   var canvas = document.getElementById('cnv');
-   var context = canvas.getContext('2d');
-   context.strokeStyle = 'rgba(0, 0, 0, 0.3)';
-   context.fillStyle = 'rgba(0, 150, 255, 0.3)';
-
-   mulaiScale(context, canvas);
-}
-
+var stop;
 //untuk mulai  scale
 function mulaiScale(context, canvas){
    var pusatKubus = {x: 0, y: 0, z: 0};
@@ -43,6 +32,7 @@ function mulaiScale(context, canvas){
          scaleZ = 1 / scaleZ;
 
          scale = new Scale(scaleX, scaleY, scaleZ);
+         print(scale.S);
       }
 
       if(counterNow < 0){
@@ -53,6 +43,7 @@ function mulaiScale(context, canvas){
          scaleZ = 1 / scaleZ;
 
          scale = new Scale(scaleX, scaleY, scaleZ);
+         print(scale.S);
       }
 
       if(!reverse){
@@ -75,7 +66,7 @@ function mulaiScale(context, canvas){
 
    //startTransform();
 
-   setInterval(startTransform, deltaT);
+   stop = setInterval(startTransform, deltaT);
 }
 
 //untuk translasi
@@ -105,6 +96,7 @@ function mulaiTranslasi(context, canvas){
    var rotateX = new RotateXMatrix(4, pusatKubus); 
 
    var matrixTransformasi = kaliMatrix(matrixTranslasi.T, rotateX.Rx);
+   print(matrixTransformasi);
    
    function startTransform(){
       if(totalX >= (canvas.width) || totalX < 0){
@@ -112,13 +104,15 @@ function mulaiTranslasi(context, canvas){
          deltaX = (-1 * deltaX);
          matrixTranslasi = new TranslationMatrix(deltaX, deltaY, deltaZ);
          matrixTransformasi = kaliMatrix(matrixTranslasi.T, rotateX.Rx);
+         print(matrixTransformasi);
       }
 
       if(totalY >= (canvas.height / 2) || totalY < 0){
          reverseY = !reverseY;
          deltaY = (-1 * deltaY);
          matrixTranslasi = new TranslationMatrix(deltaX, deltaY, deltaZ);
-         matrixTransformasi = kaliMatrix(matrixTranslasi.T, rotateX.Rx); 
+         matrixTransformasi = kaliMatrix(matrixTranslasi.T, rotateX.Rx);
+         print(matrixTransformasi);
       }
 
       if(!reverseX){

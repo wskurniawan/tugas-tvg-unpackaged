@@ -1,4 +1,5 @@
-(() => {
+var stop;
+/** (() => {
    main();
 })();
 function main(){
@@ -9,7 +10,7 @@ function main(){
 
    mulaiRotasi(context, canvas);
 }
-
+**/
 //untuk rotasi
 function mulaiRotasi(context, canvas){
    var pusatKubus = {x: 0, y: 0, z: 0};
@@ -17,7 +18,7 @@ function mulaiRotasi(context, canvas){
    var rotateX = new RotateXMatrix(4, pusatKubus);
    var rotateY = new RotateYMatrix(2, pusatKubus);
    var matrixTransformasi = kaliMatrix(rotateY.Ry, rotateX.Rx);
-   console.log(matrixTransformasi.map(i => i.toString()));
+   print(matrixTransformasi);
 
    function startTransform(){
       var finalVertex = [];
@@ -33,7 +34,7 @@ function mulaiRotasi(context, canvas){
       render(kubus, context, canvas.width / 2 , canvas.height/2, canvas);
    }
 
-   setInterval(startTransform, 50);
+   stop = setInterval(startTransform, 50);
 }
 
 //untuk deklarasi vertex baru

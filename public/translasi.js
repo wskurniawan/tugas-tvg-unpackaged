@@ -1,3 +1,5 @@
+var stop;
+/**
 (() => {
    main();
 })();
@@ -9,6 +11,7 @@ function main(){
 
    mulaiTranslasi(context, canvas);
 }
+**/
 
 //untuk translasi
 function mulaiTranslasi(context, canvas){
@@ -35,6 +38,7 @@ function mulaiTranslasi(context, canvas){
    var rotateX = new RotateXMatrix(4, pusatKubus); 
 
    var matrixTransformasi = kaliMatrix(matrixTranslasi.T, rotateX.Rx);
+   print(matrixTransformasi);
 
    //print matrix disini
    
@@ -44,7 +48,7 @@ function mulaiTranslasi(context, canvas){
          deltaX = (-1 * deltaX);
          matrixTranslasi = new TranslationMatrix(deltaX, deltaY, deltaZ);
          matrixTransformasi = kaliMatrix(matrixTranslasi.T, rotateX.Rx);
-
+         print(matrixTransformasi);
          //print matrix disini
 
       }
@@ -54,7 +58,7 @@ function mulaiTranslasi(context, canvas){
          deltaY = (-1 * deltaY);
          matrixTranslasi = new TranslationMatrix(deltaX, deltaY, deltaZ);
          matrixTransformasi = kaliMatrix(matrixTranslasi.T, rotateX.Rx); 
-
+         print(matrixTransformasi);
          //print matrix disini
          
       }
@@ -87,7 +91,7 @@ function mulaiTranslasi(context, canvas){
       render(finalRender, context, 0, canvas.height/2, canvas);
    }
 
-   setInterval(startTransform, 50);
+   stop = setInterval(startTransform, 50);
 
 }
 

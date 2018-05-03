@@ -13,36 +13,39 @@
             <canvas id="cnv" width="800" height="600"></canvas>
         </div>
         <div class="col-md-4">
-            <div class="row" style="border-bottom: 3px solid black; height: 50%; width: 50%;">
-                Coba
+            <div class="row" style="border-bottom: 3px solid black; height: 50%; text-align: center;">
+                <button class="btn btn-primary" onclick="rotasi();">Rotasi</button>
+                <button class="btn btn-primary" onclick="scale();">Scale</button>
+                <button class="btn btn-primary" onclick="shear();">Shear</button>
+                <button class="btn btn-primary" onclick="translasi();">Translasi</button>
             </div>
-            <div class="row" style="height: 100%; width: 100%; padding-top: 30%;">
-                    <div style="padding-left: 50%;">
+            <div class="row" style="height: 50%; text-align: center;">
+                    <div style="padding-left: 10%;">
                             Matriks Transformasi
-                            <table id="matrix" style="color: red; border-left: 1px solid black; border-right: 1px solid black;">
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>4</td>
+                            <table id="matrix" style="border-spacing: 30px; border-collapse: separate; color: red; border-left: 1px solid black; border-right: 1px solid black;">
+                                    <tr class="spaceUnder">
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>4</td>
+                                    <tr class="spaceUnder">
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>4</td>
+                                    <tr class="spaceUnder">
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>4</td>
+                                    <tr class="spaceUnder">
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
                                     </tr>
                             </table>
                     </div>
@@ -50,8 +53,11 @@
         </div>
     </div>
    
-   
+   <script src="public/print.js"></script>
    <script src="public/rotasi.js"></script>
+   <script src="public/scale.js"></script>
+   <script src="public/shear.js"></script>
+   <script src="public/translasi.js"></script>
    <script src="public/main.js"></script>
    <script src="public/bootstrap.min.js"></script>
 </body>
