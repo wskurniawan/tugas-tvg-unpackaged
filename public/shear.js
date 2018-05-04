@@ -76,7 +76,7 @@ function mulaiShearXY(context, canvas){
       render(rotateRender(30, 30, kubus, pusatKubus), context, canvas.width / 2 , canvas.height/2, canvas);
    }
 
-   stop = setInterval(startShearXY, 100);
+   stop = setInterval(startShearXY, 65);
    //startShearXY();
 }
 

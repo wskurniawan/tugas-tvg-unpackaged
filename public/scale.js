@@ -5,15 +5,15 @@ function mulaiScale(context, canvas){
    var kubus = new Kubus(pusatKubus, 200);
 
    //untuk menentukan besarnya scale
-   var scaleX = 1.05;
-   var scaleY = 1.05; //jangan 0
-   var scaleZ = 1.05; //jangan 0
+   var scaleX = 1.018;
+   var scaleY = 1.018; //jangan 0
+   var scaleZ = 1.018; //jangan 0
 
    //delta waktu interfal (milisecond)
-   var deltaT = 100;
+   var deltaT = 50;
 
    //untuk counter supaya bisa bolak balik
-   var counter = 10;
+   var counter = 30;
    var counterNow = 0;
 
    var reverse = false;
