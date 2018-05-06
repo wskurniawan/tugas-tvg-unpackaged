@@ -95,6 +95,87 @@ function mulaiTranslasi(context, canvas){
 
 }
 
+function customTranslasi(context, canvas, sumbuX, sumbuY, sumbuZ){
+    var pusatKubus = {x: 0, y: 0, z: 0};
+    var kubus = new Kubus(pusatKubus, 50);
+ 
+    //menentukan besarnya translasi
+    var deltaX = sumbuX;
+    var deltaY = sumbuY;
+    var deltaZ = sumbuZ;
+ 
+    //variabel untuk tracking total perubahan saat ini
+    var totalX = 0;
+    var totalY = 0;
+    var totalZ = 0;
+ 
+    var reverseX = false;
+    var reverseY = false;
+    var reverseZ = false;
+    
+    //matrix translasi
+    var matrixTranslasi = new TranslationMatrix(deltaX, deltaY, deltaZ);
+ 
+    var rotateX = new RotateXMatrix(4, pusatKubus); 
+ 
+    var matrixTransformasi = kaliMatrix(matrixTranslasi.T, rotateX.Rx);
+    print(matrixTransformasi);
+ 
+    //print matrix disini
+    
+    function startTransform(){
+       if(totalX >= (canvas.width) || totalX < 0){
+          reverseX = !reverseX;
+          deltaX = (-1 * deltaX);
+          matrixTranslasi = new TranslationMatrix(deltaX, deltaY, deltaZ);
+          matrixTransformasi = kaliMatrix(matrixTranslasi.T, rotateX.Rx);
+          print(matrixTransformasi);
+          //print matrix disini
+ 
+       }
+ 
+       if(totalY >= (canvas.height / 2) || totalY < 0){
+          reverseY = !reverseY;
+          deltaY = (-1 * deltaY);
+          matrixTranslasi = new TranslationMatrix(deltaX, deltaY, deltaZ);
+          matrixTransformasi = kaliMatrix(matrixTranslasi.T, rotateX.Rx); 
+          print(matrixTransformasi);
+          //print matrix disini
+          
+       }
+ 
+       if(!reverseX){
+          totalX = totalX + deltaX;
+       }else{
+          totalX = totalX + deltaX;
+       }
+ 
+       if(!reverseY){
+          totalY = totalY + deltaY;
+       }else{
+          totalY = totalY + deltaY;
+       }
+ 
+       var finalVertex = [];
+       for(var i = 0; i < kubus.vertex.length; i++){
+          var pointP = new MatrixFromObject(kubus, i);
+ 
+          var finalPoint = kaliMatrix(matrixTransformasi, pointP.P);
+          finalVertex.push(new Vertex(finalPoint[0][0], finalPoint[1][0], finalPoint[2][0]));
+       }
+ 
+       kubus = new KubusFromVertex(finalVertex);
+ 
+       //rotasi untuk render
+       var finalRender = rotateRender(30, 30, kubus, pusatKubus);
+ 
+       render(finalRender, context, 0, canvas.height/2, canvas);
+    }
+ 
+    stop = setInterval(startTransform, 50);
+ 
+ }
+
 //untuk deklarasi vertex baru
 function Vertex(x, y, z){
    this.x = x;

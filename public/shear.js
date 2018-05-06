@@ -80,6 +80,73 @@ function mulaiShearXY(context, canvas){
    //startShearXY();
 }
 
+function customShearXY(context, canvas, dX, dY){
+    //inisiasi objek awal kubus
+    var pusatKubus = {x: 0, y: 0, z: 0};
+    var kubus = new Kubus(pusatKubus, 200);
+ 
+    //besarnya shear
+    var deltaX = dX;
+    var deltaY = dY;
+ 
+    //membuat matrix transformasi shear
+    var matrixShear = new ShearXY(deltaX / 5, deltaY / 5);
+    print(matrixShear.shXY);
+ 
+    //print matrix trans disini
+ 
+    //untuk menghitung seberapa besar Shear
+    var totalDeltaX = 0;
+    var totalDeltaY = 0;
+ 
+    //variabel pembalik operasi
+    var reverse = false;
+ 
+    //fungsi yang dipanggil tiap interval tertentu
+    function startShearXY(){
+       if(totalDeltaX >= deltaX && totalDeltaY >= deltaY){
+          matrixShear = new ShearXY(-deltaX / 5, -deltaY / 5);
+          reverse = true;
+ 
+          //print matrix trans disini
+       }
+ 
+       if(totalDeltaX <= 0 && totalDeltaY <= 0){
+          matrixShear = new ShearXY(deltaX / 5, deltaY / 5);
+          reverse = false;
+ 
+          //print matrix trans disini
+       }
+ 
+       //update status shear
+       if(!reverse){
+          totalDeltaX = totalDeltaX + deltaX / 5;
+          totalDeltaY = totalDeltaY + deltaY / 5;
+          console.log('maju');
+       }else{
+          totalDeltaX = totalDeltaX - deltaX / 5;
+          totalDeltaY = totalDeltaY - deltaY / 5;
+          console.log('mundur');
+       }
+ 
+       var finalVertex = [];
+       for(var i = 0; i < kubus.vertex.length; i++){
+          var pointP = new MatrixFromObject(kubus, i);
+          //var matrixTransformasi = rotateY.Ry;
+ 
+          var finalPoint = kaliMatrix(matrixShear.shXY, pointP.P);
+          finalVertex.push(new Vertex(finalPoint[0][0], finalPoint[1][0], finalPoint[2][0]));
+       }
+ 
+       kubus = new KubusFromVertex(finalVertex);
+ 
+       render(rotateRender(30, 30, kubus, pusatKubus), context, canvas.width / 2 , canvas.height/2, canvas);
+    }
+ 
+    stop = setInterval(startShearXY, 65);
+    //startShearXY();
+ }
+
 //untuk deklarasi vertex baru
 function Vertex(x, y, z){
    this.x = x;

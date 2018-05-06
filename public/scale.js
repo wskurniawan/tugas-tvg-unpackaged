@@ -69,6 +69,75 @@ function mulaiScale(context, canvas){
    stop = setInterval(startTransform, deltaT);
 }
 
+function customScale(context, canvas, sumbuX, sumbuY, sumbuZ){
+    var pusatKubus = {x: 0, y: 0, z: 0};
+    var kubus = new Kubus(pusatKubus, 200);
+ 
+    //untuk menentukan besarnya scale
+    var scaleX = sumbuX;
+    var scaleY = sumbuY; //jangan 0
+    var scaleZ = sumbuZ; //jangan 0
+ 
+    //delta waktu interfal (milisecond)
+    var deltaT = 50;
+ 
+    //untuk counter supaya bisa bolak balik
+    var counter = 30;
+    var counterNow = 0;
+ 
+    var reverse = false;
+ 
+    //matrix scale
+    var scale = new Scale(scaleX, scaleY, scaleZ);
+ 
+    function startTransform(){
+       var finalVertex = [];
+ 
+       if(counterNow >= counter){
+          reverse = true;
+ 
+          scaleX = 1 / scaleX;
+          scaleY = 1 / scaleY;
+          scaleZ = 1 / scaleZ;
+ 
+          scale = new Scale(scaleX, scaleY, scaleZ);
+          print(scale.S);
+       }
+ 
+       if(counterNow < 0){
+          reverse = false;
+ 
+          scaleX = 1 / scaleX;
+          scaleY = 1 / scaleY;
+          scaleZ = 1 / scaleZ;
+ 
+          scale = new Scale(scaleX, scaleY, scaleZ);
+          print(scale.S);
+       }
+ 
+       if(!reverse){
+          counterNow = counterNow + 1;
+       }else{
+          counterNow = counterNow - 1;
+       }
+       
+       for(var i = 0; i < kubus.vertex.length; i++){
+          var pointP = new MatrixFromObject(kubus, i);
+ 
+          var finalPoint = kaliMatrix(scale.S, pointP.P);
+          finalVertex.push(new Vertex(finalPoint[0][0], finalPoint[1][0], finalPoint[2][0]));
+       }
+ 
+       kubus = new KubusFromVertex(finalVertex);
+ 
+       render(rotateRender(30, 30, kubus, pusatKubus), context, canvas.width / 2 , canvas.height/2, canvas);
+    }
+ 
+    //startTransform();
+ 
+    stop = setInterval(startTransform, deltaT);
+ }
+
 //untuk translasi
 function mulaiTranslasi(context, canvas){
    var pusatKubus = {x: 0, y: 0, z: 0};

@@ -37,6 +37,31 @@ function mulaiRotasi(context, canvas){
    stop = setInterval(startTransform, 50);
 }
 
+function customRotasi(context, canvas, sudutX, sudutY){
+    var pusatKubus = {x: 0, y: 0, z: 0};
+    var kubus = new Kubus(pusatKubus, 200);
+    var rotateX = new RotateXMatrix(sudutX, pusatKubus);
+    var rotateY = new RotateYMatrix(sudutY, pusatKubus);
+    var matrixTransformasi = kaliMatrix(rotateY.Ry, rotateX.Rx);
+    print(matrixTransformasi);
+
+    function startTransform(){
+        var finalVertex = [];
+        for(var i = 0; i < kubus.vertex.length; i++){
+            var pointP = new MatrixFromObject(kubus, i);
+
+            var finalPoint = kaliMatrix(matrixTransformasi, pointP.P);
+            finalVertex.push(new Vertex(finalPoint[0][0], finalPoint[1][0], finalPoint[2][0]));
+        }
+
+        kubus = new KubusFromVertex(finalVertex);
+
+        render(kubus, context, canvas.width / 2 , canvas.height/2, canvas);
+    }
+
+    stop = setInterval(startTransform, 50);
+}
+
 //untuk deklarasi vertex baru
 function Vertex(x, y, z){
    this.x = x;
