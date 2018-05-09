@@ -59,10 +59,3 @@ function translasi(){
 
    mulaiTranslasi(context, canvas);
 }
-function translasiCust(sumbuX, sumbuY, sumbuZ){
-    stopAll();
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.strokeStyle = 'rgba(0, 0, 0, 0.3)';
-    context.fillStyle = 'rgba(0, 150, 255, 0.3)';
-    customTranslasi(context, canvas, sumbuX, sumbuY, sumbuZ);
-}

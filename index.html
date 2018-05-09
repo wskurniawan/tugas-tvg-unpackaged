@@ -24,7 +24,7 @@
                     &nbsp;
                     <button class="btn btn-outline-primary btn-lg" id="shear">Shear</button>
                     &nbsp;
-                    <button class="btn btn-outline-primary btn-lg" id="translasi">Translasi</button>
+                    <button class="btn btn-outline-primary btn-lg" onclick="translasi();" id="translasi">Translasi</button>
                 </div>
                 <div id="inputrotasi" class="form-group" style="display: none">
                     <input type="rotating" class="form-control" type="text" placeholder="Sudut Rotasi X" id="rtsx">
@@ -56,18 +56,6 @@
                     <div id="wrapper">
                         <button class="btn btn-primary btn-sm btn-block" id="btnShear">Shear</button>
                         <button class="btn btn-primary btn-sm btn-block" onclick="shear();">Auto</button>
-                    </div>
-                </div>
-                <div id="inputtranslasi" class="form-group" style="display: none">
-                    <input class="form-control" type="text" placeholder="Besar Translasi X" id="tranx">
-                    <br>
-                    <input class="form-control" type="text" placeholder="Besar Translasi Y" id="trany">
-                    <br>
-                    <input class="form-control" type="text" placeholder="Besar Translasi Z" id="tranz">
-                    <br>
-                    <div id="wrapper">
-                        <button class="btn btn-primary btn-sm btn-block" id="btnTranslasi">Translasi</button>
-                        <button class="btn btn-primary btn-sm btn-block" onclick="translasi();">Auto</button>
                     </div>
                 </div>
             </div>
@@ -111,6 +99,7 @@
         window.$ = window.jQuery = require('./public/jquery.js');        
         $(document).ready(function() {
             hideAll();
+            printKubus();
         });
 
         function hideAll(){
@@ -186,22 +175,6 @@
             $('button').removeClass('active');
             $(this).addClass('active');
             $('#inputtranslasi').show();
-        });
-        $('#btnTranslasi').on('click', function(e){
-            var x = $('#tranx').val();
-            if(x == ''){
-                x = 0;
-            }
-            var y = $('#trany').val();
-            if(y == ''){
-                y = 0;
-            }
-            var z = $('#tranz').val();
-            if(z == ''){
-                z = 0;
-            }
-            console.log(x,y);
-            translasiCust(x,y,z);
         });
     </script>
     <script src="public/print.js"></script>

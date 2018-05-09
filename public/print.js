@@ -12,3 +12,13 @@ function print(matr){
         // s += ' ' + cll.innerText;
     }
 }
+
+function printKubus(){
+    var canvas = document.getElementById('cnv');
+    var context = canvas.getContext('2d');
+    context.strokeStyle = 'rgba(0, 0, 0, 0.3)';
+    context.fillStyle = 'rgba(0, 150, 255, 0.3)';
+    var pusatKubus = {x: 0, y: 0, z: 0};
+    var kubus = new Kubus(pusatKubus, 200);
+    render(kubus, context, canvas.width / 2 , canvas.height/2, canvas);
+}

@@ -1,0 +1,189 @@
+<!doctype <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>TVG</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="public/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-8" style="border-right: 1.5px solid #007bff;">
+            <canvas id="cnv" width="800" height="600"></canvas>
+        </div>
+        <div class="col-md-4">
+            <div class="row justify-content-center" style="border-bottom: 1.5px solid #007bff; height: 50%; text-align: center;">
+                <div id="wrapper">
+                    <br>
+                    <button class="btn btn-outline-primary btn-lg" id="rotasi">Rotasi</button>
+                    &nbsp;
+                    <button class="btn btn-outline-primary btn-lg" id="scale">Scale</button>
+                    &nbsp;
+                    <button class="btn btn-outline-primary btn-lg" id="shear">Shear</button>
+                    &nbsp;
+                    <button class="btn btn-outline-primary btn-lg" onclick="translasi();" id="translasi">Translasi</button>
+                </div>
+                <div id="inputrotasi" class="form-group" style="display: none">
+                    <input type="rotating" class="form-control" type="text" placeholder="Sudut Rotasi X" id="rtsx">
+                    <br>
+                    <input type="rotating" class="form-control" type="text" placeholder="Sudut Rotasi Y" id="rtsy">
+                    <br>
+                    <div id="wrapper">
+                        <button class="btn btn-primary btn-sm btn-block" id="btnRotasi">Rotate</button>
+                        <button class="btn btn-primary btn-sm btn-block" onclick="rotasi();">Auto</button>
+                    </div>
+                </div>
+                <div id="inputscale" class="col-sm-4 form-group" style="display: none">
+                    <input type="scaling" class="form-control" type="text" placeholder="Besar Scale X" id="sclx">
+                    <br>
+                    <input type="scaling" class="form-control" type="text" placeholder="Besar Scale Y" id="scly">
+                    <br>
+                    <input type="scaling" class="form-control" type="text" placeholder="Besar Scale Z" id="sclz">
+                    <br>
+                    <div id="wrapper">
+                        <button class="btn btn-primary btn-sm btn-block" id="btnScale">Scale</button>
+                        <button class="btn btn-primary btn-sm btn-block" onclick="scale();">Auto</button>
+                    </div>
+                </div>
+                <div id="inputshear" class="form-group" style="display: none">
+                    <input type="shearing" class="form-control" type="text" placeholder="Besar Shear X" id="shrx">
+                    <br>
+                    <input type="shearing" class="form-control" type="text" placeholder="Besar Shear Y" id="shry">
+                    <br>
+                    <div id="wrapper">
+                        <button class="btn btn-primary btn-sm btn-block" id="btnShear">Shear</button>
+                        <button class="btn btn-primary btn-sm btn-block" onclick="shear();">Auto</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row row align-items-center justify-content-center" style="height: 50%; text-align: center;">
+                <div>
+                    <b>
+                        <p>Matriks Transformasi</p>
+                    </b>
+                    <table id="matrix" style="border-spacing: 30px; border-collapse: separate; color: red; border-left: 1px solid black; border-right: 1px solid black;">
+                        <tr class="spaceUnder">
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr class="spaceUnder">
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr class="spaceUnder">
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr class="spaceUnder">
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.$ = window.jQuery = require('./public/jquery.js');        
+        $(document).ready(function() {
+            hideAll();
+            printKubus();
+        });
+
+        function hideAll(){
+            $('#inputrotasi').hide();
+            $('#inputscale').hide();
+            $('#inputshear').hide();
+            $('#inputtranslasi').hide();
+        }
+
+        $('#rotasi').on('click', function(e){
+            hideAll();
+            $('button').removeClass('active');
+            $(this).addClass('active');
+            $('#inputrotasi').show();
+        });
+        $('#btnRotasi').on('click', function(e){
+            var x = $('#rtsx').val();
+            if(x == ''){
+                x = 0;
+            }
+            var y = $('#rtsy').val();
+            if(y == ''){
+                y = 0;
+            }
+            console.log(x,y);
+            rotasiCust(x,y)
+        });
+
+        $('#scale').on('click', function(e){
+            hideAll();
+            $('button').removeClass('active');
+            $(this).addClass('active');
+            $('#inputscale').show();
+        });
+        $('#btnScale').on('click', function(e){
+            var x = $('#sclx').val();
+            if(x == ''){
+                x = 0;
+            }
+            var y = $('#scly').val();
+            if(y == ''){
+                y = 0;
+            }
+            var z = $('#sclz').val();
+            if(z == ''){
+                z = 0;
+            }
+            console.log(x,y,z);
+            scaleCust(x,y,z);
+        });
+
+        $('#shear').on('click', function(e){
+            hideAll();
+            $('button').removeClass('active');
+            $(this).addClass('active');
+            $('#inputshear').show();
+        });
+        $('#btnShear').on('click', function(e){
+            var x = $('#shrx').val();
+            if(x == ''){
+                x = 0;
+            }
+            var y = $('#shry').val();
+            if(y == ''){
+                y = 0;
+            }
+            console.log(x,y);
+            shearCust(x,y);
+        });
+
+        $('#translasi').on('click', function(e){
+            hideAll();
+            $('button').removeClass('active');
+            $(this).addClass('active');
+            $('#inputtranslasi').show();
+        });
+    </script>
+    <script src="public/print.js"></script>
+    <script src="public/rotasi.js"></script>
+    <script src="public/scale.js"></script>
+    <script src="public/shear.js"></script>
+    <script src="public/translasi.js"></script>
+    <script src="public/main.js"></script>
+    <script src="public/bootstrap.min.js"></script>
+</body>
+
+</html>
